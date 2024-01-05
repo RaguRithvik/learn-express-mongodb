@@ -1,0 +1,112 @@
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif !important;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* height: 100vh; */
+  background-color: #f4f4f4 !important;
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 40px 60px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 500px;
+  margin-top: 180px;
+}
+
+h2 {
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+label {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Quicksand', sans-serif !important;
+  margin-bottom: .5rem !important;
+}
+
+form button {
+  padding: 10px;
+  background-color: #4caf50 !important;
+  color: white;
+  border: none !important;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #459749 !important;
+}
+
+.text-left {
+  text-align: left
+}
+
+form p.text-left.mb-2 {
+  font-weight: bold !important;
+}
+
+form button {
+  margin-top: .8rem !important;
+}
+
+.error {
+  color: #fd3131;
+  text-align: right;
+  font-size: 14px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 13px;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+/* SideMenu.css */
+.side-menu {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  padding-top: 20px;
+}
+
+.side-menu a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  transition: 0.3s;
+}
+
+.side-menu a:hover {
+  background-color: #555;
+}
+.content{
+  margin-top: 70px;
+}
