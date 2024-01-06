@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import FormField from '../../Component/FromField';
-import { createModal } from '../../Services/Uitilities';
+import { createModal, updateModal } from '../../Services/Uitilities';
 import { Endpoints } from '../../Config';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -19,7 +19,13 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
     formData.append('name', values.name);
     formData.append('email', values.email);
     formData.append('image', values.image);
-    createModal(Endpoints?.manager, formData, setLoading, setshowModal)
+    if (formAction === "Add") {
+      createModal(Endpoints?.manager, formData, setLoading, setshowModal)
+    }
+    else{
+      // formData.append('id', values.id);
+      updateModal(Endpoints?.manager, formData, setLoading, setshowModal)
+    }
   };
 
   return (
@@ -30,9 +36,9 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
       size="lg"
       backdrop="static"
       keyboard={false}
-      >
+    >
       <Modal.Header closeButton>
-        <Modal.Title>{formAction} Manage</Modal.Title>
+        <Modal.Title>{formAction} {pageName}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Formik
@@ -43,6 +49,7 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
           validateOnChange={true}
         >
           {(formik) => {
+            console.log(formik.values, "formik.values");
             return (
               <Form>
                 <FormField
@@ -77,7 +84,7 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
                   type="submit"
                   onClick={() => {
                     formik.submitForm()
-                  }}>Save</Button>
+                  }}>{formAction}</Button>
               </Form>)
           }}
         </Formik>

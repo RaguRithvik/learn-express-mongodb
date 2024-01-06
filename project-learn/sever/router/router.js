@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router()
 const { createUsers, loginUser } = require("../controller/usersController")
-const { CreateManager, getManager, deleteManager } = require("../controller/managerController")
+const { CreateManager, getManager, updateManager, deleteManager } = require("../controller/managerController")
 const Protected = require("../middleware/protected")
 
 const multer = require('multer');
@@ -17,7 +17,7 @@ const upload = multer({ storage: storage }).single("image");
 //Router
 router.route("/create").post(createUsers)
 router.route("/login").post(loginUser)
-router.route("/manager").post(Protected, upload, CreateManager).get(Protected, getManager).delete(Protected, deleteManager)
+router.route("/manager").post(Protected, upload, CreateManager).get(Protected, getManager).delete(Protected, deleteManager).put(Protected, upload, updateManager)
 router.post("/employee", Protected, CreateManager)
 
 module.exports = router

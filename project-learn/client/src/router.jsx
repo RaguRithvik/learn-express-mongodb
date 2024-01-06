@@ -3,7 +3,7 @@ import Login from "./Pages/Login";
 import Main from "./Pages/Main";
 import Dashboard from "./Pages/Dashboard";
 import { Manager } from "./Pages/Manager";
-import { Navigate, useRoutes, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
             { element: <Navigate to="/home" replace />, index: true },
             {
                 element: <Dashboard />,
-                path: "home/",
+                path: "home",
             },
             {
                 element: <Manager />,

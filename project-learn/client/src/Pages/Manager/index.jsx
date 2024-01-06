@@ -9,7 +9,7 @@ import { ManagerInit } from '../../Component/InitialValues';
 import { FormModal } from './FormModal';
 
 export const Manager = () => {
-    const header = ["S.No", "name", "email", "Action"];
+    const header = ["S.No", "name", "email", "images", "Action"];
     const trigger = useSelector((state) => state?.apiTrigger)
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);

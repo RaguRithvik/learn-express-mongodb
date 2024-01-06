@@ -1,1 +1,1 @@
-export const ManagerInit = { name: '', email: '', image: null }
+export const ManagerInit = { name: '', email: '', images: null }

@@ -18,6 +18,19 @@ export const loginAuth = async (endpoint, values, setLoading, navigation) => {
       setLoading(false);
     });
 };
+export const getallDatas = async (endpoint, setData, setLoading) => {
+  executeAPI(endpoint, "GET", null, null)
+    .then((response) => {
+      if (response !== undefined) {
+        setData(response?.records)
+      }
+    })
+    .catch((error) => {
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+};
 export const createModal = async (endpoint, values, setLoading, setOpen) => {
   setLoading(true);
   executeAPI(endpoint, "POST", values, null)
@@ -34,11 +47,14 @@ export const createModal = async (endpoint, values, setLoading, setOpen) => {
       setLoading(false);
     });
 };
-export const getallDatas = async (endpoint, setData, setLoading) => {
-  executeAPI(endpoint, "GET", null, null)
+export const updateModal = async (endpoint, values, setLoading, setOpen) => {
+  setLoading(true);
+  executeAPI(endpoint, "PUT", values, null)
     .then((response) => {
       if (response !== undefined) {
-        setData(response?.records)
+        showToast("success", "Data added successfull");
+        store.dispatch(setApiTrigger(Date.now()));
+        setOpen(false)
       }
     })
     .catch((error) => {

@@ -13,7 +13,7 @@ const CommonPageTables = ({ pageName, header, data, setLoading, loading, formDat
         updatedC[key] = editData[key];
       }
     }
-    setformAction("Edit");
+    setformAction("Update");
     setFormData({ ...updatedC, id: editData?._id })
     setshowModal(true)
   }

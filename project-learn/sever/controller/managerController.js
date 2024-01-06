@@ -1,7 +1,8 @@
 const managerschema = require("../model/managerModel");
+const fs = require('fs');
+const { employeeUpdate } = require("../validation");
 // get
 const getManager = async (req, res, next) => {
-    console.log("req");
     try {
         const getData = await managerschema.find();
         res.status(200).json({ success: true, records: getData });
@@ -32,7 +33,35 @@ const CreateManager = async (req, res, next) => {
     }
 };
 // get
-const fs = require('fs');
+const updateManager = async (req, res, next) => {
+    const { id } = req.body;
+    try {
+        // await employeeUpdate.validateAsync(id);
+        if (!id) {
+            res.status(400)
+            throw new Error("ID not found")
+        }
+        const dataID = await managerschema.findById({ _id: id });
+        if (!dataID) {
+            res.status(404)
+            throw new Error("ID not found")
+        }
+        let images;
+        if (req.file) {
+            images = req.file.filename;
+        }
+        const updateData = await managerschema.findByIdAndUpdate({ _id: id }, req.body, { new: true });
+        if (updateData) {
+            res.status(200).json({ success: true, message: 'Data update successfully' })
+        }
+        else {
+            res.status(404).json({ success: false, message: 'Data not updated' });
+        }
+    }
+    catch (err) {
+        next(err);
+    }
+}
 const deleteManager = async (req, res, next) => {
     const { id } = req.body;
     try {
@@ -42,7 +71,6 @@ const deleteManager = async (req, res, next) => {
         }
         const fileName = manager.images;
         const filePath = "./public/images/" + fileName;
-        
         const deletedData = await managerschema.deleteOne({ _id: id });
         if (deletedData.deletedCount === 1) {
             if (filePath) {
@@ -63,4 +91,4 @@ const deleteManager = async (req, res, next) => {
     }
 };
 
-module.exports = { CreateManager, getManager, deleteManager };
+module.exports = { CreateManager, getManager, deleteManager, updateManager };
