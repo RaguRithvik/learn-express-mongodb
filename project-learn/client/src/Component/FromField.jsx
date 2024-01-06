@@ -50,6 +50,26 @@ const FormField = ({ formik, fieldProps }) => {
             </>
         );
     }
+    if (fieldType === "upload") {
+        return (
+            <>
+                <p className="text-left mb-2">{label || ""}</p>
+                <input
+                    type="file"
+                    {...otherProps}
+                    name={name}
+                    id={name}
+                    // value={field.value ?? ""}
+                    placeholder={placeholder || ""}
+                    onChange={(e) => {
+                        const file = e.target.files[0];
+                        formik.setFieldValue(name, file);
+                    }}
+                />
+                <span className="error"><ErrorMessage name={name} /></span>
+            </>
+        );
+    }
     else return null
 }
 export default FormField;

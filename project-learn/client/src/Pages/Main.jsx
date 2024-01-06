@@ -12,7 +12,7 @@ const Main = () => {
                 <Col xs={2}>
                     <div className="side-menu">
                         <Nav defaultActiveKey="/home" className="flex-column">
-                            <Nav.Link href="/home">Home</Nav.Link>
+                            <Nav.Link href="/home/manager">Home</Nav.Link>
                             <Nav.Link href="/about">About</Nav.Link>
                             <Nav.Link href="/contact">Contact</Nav.Link>
                         </Nav>
@@ -20,7 +20,7 @@ const Main = () => {
                 </Col>
                 <Col xs={10}>
                     <Navbar bg="dark" variant="dark" fixed="top" className='px-5'>
-                        <Navbar.Brand href="#home">Your App</Navbar.Brand>
+                        <Navbar.Brand href="/home">Your App</Navbar.Brand>
                         <div className="ml-auto w-100">
                             <div className='d-flex align-items-center justify-content-end text-white cursor-pointer' onClick={()=>{
                                 localStorage.clear()

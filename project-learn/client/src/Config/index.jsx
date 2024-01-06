@@ -1,3 +1,4 @@
 export const Endpoints = {
-    login: "/login"
+    login: "/login",
+    manager: "/manager"
 }
