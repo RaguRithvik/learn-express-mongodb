@@ -32,11 +32,28 @@ const CreateManager = async (req, res, next) => {
     }
 };
 // get
+const fs = require('fs');
 const deleteManager = async (req, res, next) => {
-    const { id } = req.body
+    const { id } = req.body;
     try {
+        const manager = await managerschema.findOne({ _id: id });
+        if (!manager) {
+            return res.status(404).json({ success: false, message: 'ID not found' });
+        }
+        const fileName = manager.images;
+        const filePath = "./public/images/" + fileName;
+        
         const deletedData = await managerschema.deleteOne({ _id: id });
         if (deletedData.deletedCount === 1) {
+            if (filePath) {
+                fs.unlink(filePath, (err) => {
+                    if (err) {
+                        console.error('Error deleting file:', err.message);
+                    } else {
+                        console.log('File deleted successfully:', filePath);
+                    }
+                });
+            }
             res.status(200).json({ success: true, message: 'Data deleted successfully' });
         } else {
             res.status(404).json({ success: false, message: 'ID not found' });
@@ -45,4 +62,5 @@ const deleteManager = async (req, res, next) => {
         next(err);
     }
 };
+
 module.exports = { CreateManager, getManager, deleteManager };

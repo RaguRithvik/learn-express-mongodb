@@ -83,7 +83,7 @@ const CommonPageTables = ({ pageName, header, data, setLoading, loading, formDat
                   </button>
                 </td>
               </tr>
-            )) : <p>No Data Found</p>}
+            )) : <tr> <td colSpan={header?.length} className='pt-3 text-center'><p>No Data Found</p></td></tr>}
           </>
         </tbody>
       </table>
