@@ -36,7 +36,7 @@ export const createModal = async (endpoint, values, setLoading, setOpen) => {
   executeAPI(endpoint, "POST", values, null)
     .then((response) => {
       if (response !== undefined) {
-        showToast("success", "Data added successfull");
+        showToast("success", response?.message ?? "Data added successfull");
         store.dispatch(setApiTrigger(Date.now()));
         setOpen(false)
       }
@@ -52,7 +52,7 @@ export const updateModal = async (endpoint, values, setLoading, setOpen) => {
   executeAPI(endpoint, "PUT", values, null)
     .then((response) => {
       if (response !== undefined) {
-        showToast("success", "Data added successfull");
+        showToast("success", response?.message ?? "Data update successfull");
         store.dispatch(setApiTrigger(Date.now()));
         setOpen(false)
       }

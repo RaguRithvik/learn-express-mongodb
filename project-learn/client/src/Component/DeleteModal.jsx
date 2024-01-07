@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { deletelData } from '../Services/Uitilities';
+
 const DeleteModal = ({ deleteModal, setDeleteModal, deleteId, endpoints }) => {
     const [loading, setLoading] = useState(false);
-
     return (
         <Modal
             show={deleteModal}

@@ -9,21 +9,21 @@ import { Modal, Button } from 'react-bootstrap';
 const validationSchema = Yup.object({
   name: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email address').required('Required'),
-  image: Yup.mixed().required('Image is required'),
+  images: Yup.mixed().required('Image is required'),
 });
 
-export const FormModal = ({ showModal, setshowModal, formAction, formData, pageName }) => {
+export const FormModal = ({ showModal, setshowModal, formAction, formData }) => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values) => {
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('email', values.email);
-    formData.append('image', values.image);
+    formData.append('images', values.images);
     if (formAction === "Add") {
       createModal(Endpoints?.manager, formData, setLoading, setshowModal)
     }
     else{
-      // formData.append('id', values.id);
+      formData.append('id', values.id);
       updateModal(Endpoints?.manager, formData, setLoading, setshowModal)
     }
   };
@@ -38,7 +38,7 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
       keyboard={false}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{formAction} {pageName}</Modal.Title>
+        <Modal.Title>{formAction} Manager Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Formik
@@ -76,7 +76,7 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData, pageN
                     fieldType: "upload",
                     label: "Upload Image",
                     placeholder: "Enter Email Password",
-                    name: "image",
+                    name: "images",
                   }}
                 />
                 <Button

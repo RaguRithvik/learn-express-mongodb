@@ -84,6 +84,7 @@ form button {
 .cursor-pointer:hover {
   cursor: pointer;
 }
+
 /* SideMenu.css */
 .side-menu {
   height: 100%;
@@ -107,9 +108,14 @@ form button {
 .side-menu a:hover {
   background-color: #555;
 }
-.content{
+
+.content {
   margin-top: 70px;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  padding: 0 20px;
 }
+
 .loading-cell {
   text-align: center;
   vertical-align: middle;
@@ -135,6 +141,10 @@ form button {
     transform: rotate(360deg);
   }
 }
-.mt-100{
+
+.mt-100 {
   margin-top: 100px;
+}
+.w-80{
+    width: 90%
 }

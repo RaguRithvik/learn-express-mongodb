@@ -34,7 +34,7 @@ const CreateManager = async (req, res, next) => {
 };
 // get
 const updateManager = async (req, res, next) => {
-    const { id } = req.body;
+    const { id, email } = req.body;
     try {
         // await employeeUpdate.validateAsync(id);
         if (!id) {
@@ -46,6 +46,11 @@ const updateManager = async (req, res, next) => {
             res.status(404)
             throw new Error("ID not found")
         }
+        // const emailTaken = await managerschema.findOne({ email });
+        // if (emailTaken) {
+        //     res.status(400);
+        //     throw new Error("Email Already Taken");
+        // }
         let images;
         if (req.file) {
             images = req.file.filename;

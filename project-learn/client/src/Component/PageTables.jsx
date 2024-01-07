@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from 'react'
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import DeleteModal from './DeleteModal';
+import { Baseurls } from '../Config';
+import moment from 'moment';
+
 const CommonPageTables = ({ pageName, header, data, setLoading, loading, formData, setFormData, setshowModal, setformAction, endpoints }) => {
   const isHeaderValid = (data) => {
     return header?.length > 0 && header?.some((column) => Object.keys(data).includes(column));
@@ -40,7 +43,7 @@ const CommonPageTables = ({ pageName, header, data, setLoading, loading, formDat
           Add {pageName}
         </button>
       </div>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             {header?.length > 0 && header?.map((data, index) => {
@@ -59,11 +62,11 @@ const CommonPageTables = ({ pageName, header, data, setLoading, loading, formDat
                 </td>
               </tr>}
             {data?.length > 0 ? data?.map((rowData, rowIndex) => (
-              <tr>
+              <tr key={rowIndex}>
                 <td>{rowIndex + 1}</td>
                 {isHeaderValid(rowData) && header?.map((column, columnIndex) => {
                   if (rowData[column]) {
-                    return (<td key={columnIndex}>{rowData[column]}</td>)
+                    return (<td key={columnIndex}>{column === "images" ? <img src={`${Baseurls?.backend}${rowData[column]}`} className='rounded-circle' height={40} width={40} /> : column === "createdAt" || column === "updatedAt" ? moment(rowData[column]).format('DD-MM-YYYY') + " "+ moment(rowData[column]).format('HH:mm') : rowData[column]}</td>)
                   }
                 }
                 )}

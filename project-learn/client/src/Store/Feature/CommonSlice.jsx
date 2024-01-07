@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  isLoggedIn:false,
   user: null,
   apiTrigger: null,
   session: false,
@@ -12,6 +13,7 @@ const commonSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }) => {
+      state.isLoggedIn = true;
       state.user = payload;
     },
     setApiTrigger: (state, { payload }) => {
