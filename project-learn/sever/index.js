@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger("combined"))
 // Router
 app.use("/api", require("./router/router"));
+app.use("/api", require("./router/employeeRouter"));
 // Connect to the database
 // connectDB();
 mongoose.connect("mongodb://127.0.0.1:27017/crud", { useNewUrlParser: true, useUnifiedTopology: true })
