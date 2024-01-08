@@ -35,7 +35,7 @@ const loginUser = async (req, res, next) => {
                     password: userCheck.password,
                     role: userCheck.role
                 }
-            }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1m" })
+            }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "240m" })
             res.status(200).json({ accessToken: accessToken, userinfo: { email: userCheck.email, role: userCheck.role } })
         }
         else {
