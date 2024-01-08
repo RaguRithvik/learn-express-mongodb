@@ -148,3 +148,13 @@ form button {
 .w-80{
     width: 90%
 }
+.c-delete{
+  background-color: #dc3545 !important;
+  margin: 0 0 0 10px !important;
+}
+.c-delete:hover{
+  background-color: #dc3545 !important;
+}
+.side-menu a.active {
+  background-color: #555;
+}

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { showToast } from "../Component/Toastify";
+import { store } from "../Store/Store";
+import { setSession } from "../Store/Feature/CommonSlice";
 export const getToken = () => {
     return localStorage.getItem("token");
 };
@@ -20,7 +22,13 @@ export const executeAPI = async (endpoint, method, data = null, params = null) =
         return response.data;
     }
     catch (error) {
-        showToast("error", error?.response?.data?.message ?? "An error occurred.")
+        if (error?.response && error?.response?.status === 401) { 
+            store.dispatch(setSession(true));
+        }
+        else {
+            showToast("error", error?.response?.data?.message ?? "An error occurred.")
+        }
+
         throw Error(error?.response?.data?.message ?? "An error occurred.");
     }
 }

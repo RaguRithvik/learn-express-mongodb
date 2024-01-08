@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router()
-const { getEmployee, createEmployee } = require("../controller/employeeController")
+const { getEmployee, createEmployee, updateEmployee, deleteEmployee } = require("../controller/employeeController")
 const Protected = require("../middleware/protected")
 const multer = require('multer');
 
@@ -39,6 +39,6 @@ const uploadDocuments = multer({
     ]
 );
 
-router.route("/employee").post(Protected, uploadDocuments, createEmployee).get(Protected, getEmployee)
+router.route("/employee").post(Protected, uploadDocuments, createEmployee).get(Protected, getEmployee).delete(Protected, deleteEmployee).put(Protected, uploadDocuments, updateEmployee)
 
 module.exports = router;

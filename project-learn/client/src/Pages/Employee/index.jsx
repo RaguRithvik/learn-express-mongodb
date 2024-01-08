@@ -1,6 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { getallDatas } from '../../Services/Uitilities';
 import { Endpoints } from '../../Config';
@@ -16,10 +14,10 @@ export const Employee = () => {
     const [formData, setFormData] = useState(null);
     const [formAction, setformAction] = useState("Add");
     const [showModal, setshowModal] = useState(false);
-    const endpoints = Endpoints?.manager;
+    const endpoints = Endpoints?.employee;
 
     useEffect(() => {
-        getallDatas(Endpoints?.employee, setData, setLoading)
+        getallDatas(endpoints, setData, setLoading)
     }, [trigger])
 
     return (

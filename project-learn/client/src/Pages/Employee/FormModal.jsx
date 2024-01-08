@@ -20,25 +20,25 @@ export const FormModal = ({ showModal, setshowModal, formAction, formData }) => 
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('email', values.email);
-//    formData.append('skills', values.skills);
+    //    formData.append('skills', values.skills);
     formData.append("skills", JSON.stringify(values.skills));
     formData.append('images', values.images);
     formData.append('documents', values.documents);
     if (formAction === "Add") {
       createModal(Endpoints?.employee, formData, setLoading, setshowModal)
     }
-    else{
+    else {
       formData.append('id', values.id);
       updateModal(Endpoints?.employee, formData, setLoading, setshowModal)
     }
   };
-const handleAddSkills = () =>{
-                  if (formikRef.current) {
+  const handleAddSkills = () => {
+    if (formikRef.current) {
       const formik = formikRef.current;
-      formik.setFieldValue(`skills`, [...formik.values.skills, {skill:""}]);
+      formik.setFieldValue(`skills`, [...formik.values.skills, { skill: "" }]);
       formik.validateForm();
     }
-                  }
+  }
   return (
     <Modal
       show={showModal}
@@ -83,25 +83,25 @@ const handleAddSkills = () =>{
                   }}
                 />
                 <div class="">
-                    <div class="flex-direction-column d-flex justify-content-end">
+                  <div class="flex-direction-column d-flex justify-content-end">
                     <Button
-                    varient="success"
-                    onClick={() => handleAddSkills()}
-                    type="button"
-                  >
-                    New Skill
-                  </Button>
-                    </div>
-                    <FieldArray name="skills">
-                  {({ push, remove }) => (
-                    <div>
-                     <p class="text-left mb-2">Skills</p>
-                      {formik.values.skills?.length > 0 &&
-                        formik.values.skills?.map(
-                          (durationdData, Index) => {
-                            return (
-                              <>
-                                <div className="">
+                      varient="success"
+                      onClick={() => handleAddSkills()}
+                      type="button"
+                    >
+                      New Skill
+                    </Button>
+                  </div>
+                  <FieldArray name="skills">
+                    {({ push, remove }) => (
+                      <div>
+                        <p class="text-left mb-2">Skills</p>
+                        {formik.values.skills?.length > 0 &&
+                          formik.values.skills?.map(
+                            (durationdData, Index) => {
+                              return (
+                                <>
+                                  <div className="">
                                     <FormField
                                       formik={formik}
                                       fieldProps={{
@@ -112,29 +112,29 @@ const handleAddSkills = () =>{
                                         placeholder: "Skill",
                                       }}
                                     />
-                                    
-                                <Button 
-                                    type="button" 
-                                    varient="danger"
-                                    onClick={() => {
-                                        if(Index > 0)
-                                        { 
-                                            remove(Index) 
+
+                                    <Button
+                                      varient="danger"
+                                      type="button"
+                                      className='c-delete btn btn-danger'
+                                      onClick={() => {
+                                        if (Index > 0) {
+                                          remove(Index)
                                         }
                                       }}
-                                      >
-                                    <FaTrash />
-                                  </Button>
+                                    >
+                                      <FaTrash />
+                                    </Button>
                                   </div>
-                              </>
-                            );
-                          }
-                        )}
-                    </div>
-                  )}
-                </FieldArray>
+                                </>
+                              );
+                            }
+                          )}
+                      </div>
+                    )}
+                  </FieldArray>
                 </div>
-                 
+
                 <FormField
                   formik={formik}
                   fieldProps={{
@@ -144,14 +144,14 @@ const handleAddSkills = () =>{
                     name: "images",
                   }}
                 />
-                 <FormField
+                <FormField
                   formik={formik}
                   fieldProps={{
                     fieldType: "upload",
                     label: "Upload Documents",
                     placeholder: "",
                     name: "documents",
-                    
+
                   }}
                 />
                 <Button
