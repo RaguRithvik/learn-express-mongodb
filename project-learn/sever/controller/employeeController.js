@@ -24,6 +24,12 @@ const createEmployee = async (req, res, next) => {
         }
 
         let images, documents;
+        if (req.file) {
+            images = req.file.filename;
+        }
+        if (req.file) {
+            documents = req.file.filename;
+        }
 
         const create = await employeeSchema.create({ email, name, images, documents, skills });
         res.status(201).json({ success: true, data: create });

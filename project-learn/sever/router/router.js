@@ -28,6 +28,32 @@ const uploadDocuments = multer({ storage: storageDocuments }).single("documents"
 router.route("/create").post(createUsers)
 router.route("/login").post(loginUser)
 router.route("/manager").post(Protected, upload, CreateManager).get(Protected, getManager).delete(Protected, deleteManager).put(Protected, upload, updateManager)
-router.route("/employee").post(Protected, upload, uploadDocuments, createEmployee).get(Protected, getEmployee)
+// router.route("/employee").post(Protected, upload, uploadDocuments, createEmployee).get(Protected, getEmployee)
+router.route("/employee")
+    .post((req, res) => {
+        Protected(req, res, () => {
+            upload((req, res, next), (errImage) => {
+                if (errImage) {
+                    return res.status(400).json({ error: "Image upload failed" });
+                }
+                uploadDocuments((req, res, next), (errDocument) => {
+                    console.log(errDocument, "errImage");
+                    if (errDocument) {
+                        return res.status(400).json({ error: "Document upload failed" });
+                    }
+                    const imageDetails = req.file; // Details of the uploaded image file
+                    const documentDetails = req.file; // Details of the uploaded document file
+                    createEmployee(req.body, imageDetails, documentDetails)
+                        .then(() => {
+                            return res.json({ message: "Files uploaded successfully" });
+                        })
+                        .catch((error) => {
+                            return res.status(500).json({ error: "Error creating employee", details: error.message });
+                        });
+                });
+            });
+            
+        });
+    });
 
 module.exports = router

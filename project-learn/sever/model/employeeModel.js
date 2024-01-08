@@ -22,7 +22,7 @@ const employeeSchema = mongoose.Schema({
         type: [skillSchema], // Assuming each skill is an object with a specific structure
         required: [true, "Please add the Skills"],
     },
-    image: {
+    images: {
         type: String,
         default: "default-image-url.jpg", // Provide a default value or mechanism if applicable
     },
