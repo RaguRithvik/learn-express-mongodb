@@ -12,8 +12,12 @@ const getManager = async (req, res, next) => {
 };
 // Create
 const CreateManager = async (req, res, next) => {
+    const { user } = req.user;
     const { email, name } = req.body;
     try {
+        if (user?.role !== 'admin' && user?.role !== 'manager') {
+            return res.status(403).json({ message: `Permission denied.` });
+        }
         if (!email || !name) {
             return res.status(400).json({ error: "All Fields are mandatory fields" });
         }
@@ -82,6 +86,7 @@ const deleteManager = async (req, res, next) => {
                 fs.unlink(filePath, (err) => {
                     if (err) {
                         console.error('Error deleting file:', err.message);
+                        next(err)
                     } else {
                         console.log('File deleted successfully:', filePath);
                     }
@@ -89,7 +94,7 @@ const deleteManager = async (req, res, next) => {
             }
             res.status(200).json({ success: true, message: 'Data deleted successfully' });
         } else {
-            res.status(404).json({ success: false, message: 'ID not found' });
+            res.status(404).json({ success: false, message: 'Data not deleted' });
         }
     } catch (err) {
         next(err);
